@@ -103,7 +103,7 @@ st.markdown(
        1) GLOBAL BASE + TŁO
        ========================================================= */
     html, body {
-        font-size: 16px;                 /* (A) Baza całej aplikacji */
+        font-size: 13px;                 /* (A) Mniejsza baza całej aplikacji
         background-color: #12161d;
     }
     div[data-testid="stAppViewContainer"],
@@ -112,21 +112,23 @@ st.markdown(
     }
 
     /* =========================================================
-       2) NAGŁÓWKI (to steruje: Analiza giełdowa / Przegląd danych / Filtry / Dostępny zakres danych)
+       2) NAGŁÓWKI
+       Zmieniamy rem -> px, żeby rozmiary były stabilniejsze
+       między lokalnym środowiskiem a Streamlit Cloud.
        ========================================================= */
-    h1 {                                  /* Analiza giełdowa → wizualnie jak dawne H2 */
-        font-size: 0.4rem;
-        margin-bottom: 0.45rem;
+    h1 {                                  /* Główny nagłówek ekranu */
+        font-size: 22px;
+        margin-bottom: 8px;
     }
 
-    h2 {                                  /* Przegląd danych → wizualnie jak dawne H3 */
-        font-size: 0.35rem;
-        margin-bottom: 0.35rem;
+    h2 {                                  /* Nagłówki sekcji */
+        font-size: 18px;
+        margin-bottom: 6px;
     }
 
-    h3 {                                  /* Sekcje → jeszcze mniejsze */
-        font-size: 0.25rem;
-        margin-bottom: 0.30rem;
+    h3 {                                  /* Mniejsze nagłówki / podsekcje */
+        font-size: 15px;
+        margin-bottom: 4px;
     }
 
     /* =========================================================
@@ -137,10 +139,10 @@ st.markdown(
 
     /* (F) Najczęstszy wariant etykiet pól */
     div[data-testid="stWidgetLabel"] {
-        font-size: 0.75rem !important;    /* ← Firmy / Data od / Data do */
+        font-size: 12px !important;       /* Mniejsza etykieta pól – lepsza na laptopie i w cloud */
         font-weight: 600;
         color: #e6e6e6;
-        margin-bottom: 0.2rem;
+        margin-bottom: 0.15rem;
     }
 
     /* (G) Wariant gdy etykieta jest markdownem nad widgetem */
@@ -149,18 +151,18 @@ st.markdown(
     div[data-testid="stTextInput"] div[data-testid="stMarkdownContainer"] p,
     div[data-testid="stSelectbox"] div[data-testid="stMarkdownContainer"] p,
     div[data-testid="stMultiselect"] div[data-testid="stMarkdownContainer"] p {
-        font-size: 1.05rem !important;    /* ← Firmy / Data od / Data do */
+        font-size: 12px !important;       /* Spójny, mniejszy rozmiar etykiet */
         font-weight: 600;
         color: #e6e6e6;
-        margin-bottom: 0.2rem;
+        margin-bottom: 0.15rem;
     }
 
     /* =========================================================
        4) CHECKBOXY (to steruje: Wszystkie dostępne firmy + wskaźniki)
        ========================================================= */
     div[data-testid="stCheckbox"] label {
-        font-size: 0.70rem;               /* (H) Tekst przy checkboxach */
-        line-height: 1.05;
+        font-size: 11px;                  /* Mniejszy tekst przy checkboxach */
+        line-height: 1.0;
         padding: 0 2px;
     }
     div[data-testid="stCheckbox"] {
@@ -171,8 +173,8 @@ st.markdown(
        5) EXPANDERY (to steruje: np. "Opis działania ekranu", "Diagnostyka: ...")
        ========================================================= */
     details > summary {
-        font-size: 0.85rem;               /* (I) Tytuły expanderów */
-        padding: 0.25rem 0;
+        font-size: 12px;                  /* Mniejsze tytuły expanderów */
+        padding: 0.20rem 0;
     }
 
     /* =========================================================
@@ -189,8 +191,11 @@ st.markdown(
     /* =========================================================
        7) AG GRID
        ========================================================= */
-    .ag-theme {
-        font-size: 12px;                  /* (J) Tabela AgGrid */
+    .ag-theme,
+    .ag-root-wrapper,
+    .ag-header,
+    .ag-cell {
+        font-size: 11px !important;       /* Mniejsza czcionka tabel AgGrid */
     }
     </style>
     """,
