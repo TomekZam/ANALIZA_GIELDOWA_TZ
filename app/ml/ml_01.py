@@ -3692,11 +3692,16 @@ def render() -> None:
         )
 
         st.markdown("### Tryb eksperymentu ML")
+
+        # W wersji cloud/demo wymuszamy FAST jako tryb domyślny i jedyny dostępny runtime.
+        # Obie opcje pozostają widoczne w UI, ale kontrolka jest wyszarzona (disabled=True),
+        # więc użytkownik nie może przełączyć na FULL.
         ml01_mode = st.radio(
             "Wybierz tryb (wpływa na szybkość i dokładność porównania modeli):",
             options=["FAST", "FULL"],
-            index=0,  # domyślnie FAST
+            index=0,                 # domyślnie zaznaczony FAST
             horizontal=True,
+            disabled=True,           # obie opcje widoczne, ale brak możliwości zmiany
             help=(
                 "FAST (domyślny): CV=3, transformation=FALSE (wymuszane), "
                 "LogisticRegression max_iter=400, RandomForest n_estimators=100, "
@@ -3706,9 +3711,15 @@ def render() -> None:
                 "GradientBoosting domyślne (n_estimators=100)."
             ),
         )
+
+        st.caption(
+            "W tej wersji aplikacji tryb FULL jest pokazany informacyjnie, "
+            "ale zablokowany. Aplikacja działa wyłącznie w trybie FAST."
+        )
+
         st.markdown(
             "- **FAST** – dobry do szybkiego sprawdzenia pomysłu i porównania modeli.\n"
-            "- **FULL** – lepszy do dokładniejszej oceny, ale wymaga więcej czasu na obliczenia."
+            "- **FULL** – lepszy do dokładniejszej oceny, ale w tej wersji jest zablokowany."
         )
 
         # --- 0.1
