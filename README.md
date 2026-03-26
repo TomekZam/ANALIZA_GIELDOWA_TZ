@@ -1,94 +1,170 @@
-# Analiza GG
+# Analiza Giełdowa (AnGG) – tryb DEV
 
-Projekt **Analiza GG** to inicjatywa analityczno-badawcza poświęcona analizie spółek giełdowych
-z wykorzystaniem **analizy fundamentalnej i technicznej**.
+**Analiza Giełdowa (AnGG)** to projekt analityczno-badawczy służący do
+eksploracji historycznych danych rynkowych spółek giełdowych
+z wykorzystaniem **analizy technicznej, fundamentalnej oraz analiz statystycznych (EDA)**.
 
-Celem projektu jest wypracowanie **uporządkowanego, powtarzalnego i dobrze udokumentowanego
-podejścia do analizy giełdowej**, które w przyszłości może stanowić podstawę do budowy
-narzędzi analitycznych, modeli lub dashboardów.
-
-> Projekt ma charakter edukacyjny i analityczny.  
-> Nie stanowi doradztwa inwestycyjnego ani rekomendacji typu „kup / sprzedaj”.
+Projekt ma charakter **edukacyjny i badawczy**.
+Nie stanowi doradztwa inwestycyjnego ani rekomendacji typu *kup / sprzedaj*.
 
 ---
 
-## Zakres projektu
+## Cel projektu
 
-### W zakresie (IN)
-- analiza fundamentalna spółek giełdowych,
-- analiza techniczna (trendy, formacje, wolumen, momentum),
-- porównywanie spółek w obrębie sektorów,
-- identyfikacja i interpretacja kluczowych wskaźników finansowych i rynkowych,
-- praca na danych historycznych (EOD),
-- projektowanie logiki analitycznej i struktury danych,
-- dokumentowanie decyzji architektonicznych i analitycznych.
+Celem projektu jest:
 
-### Poza zakresem (OUT)
-- rekomendacje inwestycyjne w rozumieniu doradztwa finansowego,
-- handel automatyczny i systemy transakcyjne,
-- analiza intraday o wysokiej częstotliwości.
+- zbudowanie **spójnego, powtarzalnego i udokumentowanego** podejścia do analizy giełdowej,
+- eksploracja zależności pomiędzy ceną a wskaźnikami technicznymi i fundamentalnymi,
+- analiza historycznych sygnałów typu *future* (ex post),
+- przygotowanie danych i wiedzy pod dalsze analizy oraz modele machine learning.
 
----
-
-## Struktura repozytorium
-
-.
-├─ README.md # Opis projektu
-├─ environment.yml # Definicja środowiska (Python / analiza danych)
-├─ Dokumentacja/
-│ ├─ README.md # Wprowadzenie do dokumentacji
-│ ├─ PROJECT_BRIEF.md # Cel, zakres i kontekst projektu
-│ ├─ BACKLOG.md # Otwarte pytania i pomysły
-│ └─ adr/ # Decyzje architektoniczne (ADR)
-│ ├─ ADR_INDEX.md
-│ ├─ ADR-001-Stooq-import.md
-│ └─ ADR_TEMPLATE.md
-└─ .gitignore
+Projekt koncentruje się na **rozumieniu rynku**, a nie na bezpośrednim przewidywaniu cen.
 
 
 ---
 
-## Dokumentacja
+## Demo aplikacji
 
-Pełna dokumentacja projektu znajduje się w katalogu [`Dokumentacja/`](Dokumentacja).
+[**Otwórz aplikację Analiza Giełdowa**](https://gpw-analytics-ml-tz.streamlit.app/)
 
-Najważniejsze artefakty:
-- **PROJECT_BRIEF.md** – definicja celu, zakresu i założeń projektu,
-- **BACKLOG.md** – pytania otwarte, pomysły i kierunki dalszych prac,
-- **adr/** – decyzje architektoniczne i techniczne podejmowane w projekcie.
-
-Każda istotna decyzja projektowa:
-- jest zapisywana w ADR,
-- ma jasno opisany kontekst, uzasadnienie i konsekwencje.
 
 ---
 
-## Źródła danych (MVP)
+## Instrukcja aplikacji:
 
-Na etapie MVP podstawowym źródłem danych rynkowych jest:
-- **stooq.pl**  
-  (zgodnie z decyzją udokumentowaną w ADR-001)
+[**ADR-010 – Instrukcja programu / Zachowanie ekranów aplikacji**](documentation/adr/ADR-010-Instrukcja-programu.md)
 
-Projekt zakłada możliwość weryfikacji i rozszerzenia źródeł danych w kolejnych iteracjach.
 
 ---
 
-## Status projektu
+## Charakter repozytorium (DEV)
 
-- Status: **w toku**
+To repozytorium jest przeznaczone do **lokalnego developmentu** i prac analitycznych.
+
+Tryb DEV oznacza:
+- możliwość pracy na **bazie danych SQL**,
+- możliwość fallbacku do **plików CSV**,
+- pełny dostęp do warstwy analitycznej i infrastrukturalnej,
+- brak ograniczeń funkcjonalnych obecnych w wersji DEMO.
+
+---
+
+## Tryby pracy aplikacji
+
+Aplikacja wspiera dwa jawnie zdefiniowane tryby pracy:
+
+### DEV
+- aplikacja **może korzystać z bazy danych SQL**,
+- przy starcie wykonywany jest test połączenia z DB,
+- w przypadku braku połączenia następuje automatyczny fallback do CSV,
+- tryb przeznaczony do:
+  - developmentu,
+  - analiz,
+  - rozwoju ETL i modeli.
+
+### DEMO
+- aplikacja działa **wyłącznie na plikach CSV**,
+- brak połączenia z DB,
+- tryb przeznaczony do:
+  - publicznej prezentacji,
+  - Streamlit Cloud,
+  - repozytoriów demonstracyjnych.
+
+---
+
+## Konfiguracja trybu pracy
+
+Tryb pracy aplikacji jest sterowany **parametrami aplikacyjnymi**, a nie zmiennymi środowiskowymi.
+
+Plik:
+config/app_params.py
+
+
+Kluczowe parametry:
+
+python
+# DEMO: aplikacja działa WYŁĄCZNIE na CSV (bez DB)
+# DEV : aplikacja może używać DB
+"APP_MODE": "DEV",   # DEMO | DEV
+
+# Flaga pochodna – NIE ZMIENIANA runtime
+"APP_TEST_ON_CSV_FILES": False
+
+### Zasady
+
+- `APP_MODE` jest parametrem nadrzędnym i decyzyjnym,
+- `APP_TEST_ON_CSV_FILES` jest ustawiany wyłącznie podczas inicjalizacji aplikacji,
+- zmiana trybu wymaga restartu aplikacji.
+
+---
+
+### Konfiguracja środowiskowa (`.env`)
+
+Plik `.env` służy wyłącznie do:
+
+- sekretów,
+- konfiguracji środowiskowej,
+- połączenia z bazą danych (DB).
+
+---
+
+### Zasada obowiązująca w projekcie
+
+- `.env` → sekrety i środowisko (DB, hasła, hosty)
+- `config/app_params.py` → zachowanie aplikacji (tryby, feature flags)
+- `config/etl.py` → parametry procesów ETL
+
+Plik `.env` nie jest wersjonowany i nie trafia do repozytorium.
+
+
+
+### Uruchomienie aplikacji (DEV)
+
+1. Utwórz środowisko Conda:
+conda env create -f environment.yml
+conda activate analiza_gg
+
+2. Upewnij się, że plik .env zawiera poprawne dane połączenia do DB.
+
+3. Uruchom aplikację:
+streamlit run app.py
+
+### Źródła danych
+
+W trybie DEV aplikacja może korzystać z:
+
+- lokalnej bazy danych Microsoft SQL Server Express,
+- plików CSV (fallback lub tryb testowy).
+
+Struktura danych jest identyczna w obu przypadkach,
+co pozwala przełączać źródło bez zmian w logice aplikacji.
+
+---
+
+### Dokumentacja
+
+Pełna dokumentacja projektu znajduje się w katalogu:
+documentation/
+
+
+Najważniejsze pliki:
+
+- `ARCHITECTURE_SUMMARY.md` – opis architektury,
+- `BACKLOG.md` – pytania i kierunki dalszych prac,
+- `adr/` – decyzje architektoniczne (ADR).
+
+
+
+---
+
+### Status projektu
+
+- Status: w toku
 - Charakter: analityczno-badawczy
-- Repozytorium: prywatne
-- Główne artefakty: dokumentacja, decyzje architektoniczne, backlog
+- Tryb repozytorium: DEV (lokalne)
 
----
+### Zastrzeżenie
 
-## Zasady pracy
-
-- wyraźne oddzielanie danych, interpretacji i wniosków,
-- brak rekomendacji inwestycyjnych,
-- decyzje → ADR,
-- pytania i pomysły → BACKLOG,
-- iteracyjny rozwój projektu.
-
----
-
+Projekt nie generuje rekomendacji inwestycyjnych.
+Wszystkie analizy mają charakter historyczny (ex post)
+i służą wyłącznie budowie wiedzy oraz dalszym badaniom.
