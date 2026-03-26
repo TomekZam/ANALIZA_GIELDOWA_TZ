@@ -1,0 +1,42 @@
+name: analiza_gieldowa_tz
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.11.14
+  - pip
+
+  # Core
+  - numpy
+  - pandas
+
+  # ML / analytics
+  - scikit-learn=1.7.1
+  - joblib
+
+  # Visualization
+  - matplotlib
+  - seaborn
+  - plotly
+
+  # Runtime / utils
+  - jinja2
+  - markupsafe
+  - protobuf
+  - pillow
+  - python-dotenv
+  - pyyaml
+  - requests
+
+  # Compatibility packages
+  - sqlalchemy
+  - pyodbc
+
+  - pip:
+      - streamlit==1.52.2
+      - streamlit-aggrid==0.3.4.post3
+      - altair==6.0.0
+      - pyarrow==22.0.0
+      - pydeck==0.9.1
+      - watchdog==6.0.0

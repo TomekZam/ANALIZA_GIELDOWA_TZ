@@ -1,0 +1,58 @@
+# --- Secrets ---
+.env
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyc
+
+# --- Virtual environments ---
+.venv/
+venv/
+env/
+
+# --- Jupyter / cache ---
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.cache/
+
+# --- Local data (not versioned) ---
+data/raw/
+data/tmp/
+data/cache/
+
+# --- OS / Editor ---
+.DS_Store
+Thumbs.db
+.vscode/settings.json
+.vscode/
+
+# Import danych – pliki robocze, archiwa i logi
+import/prd/
+
+# Testy
+tests/
+
+# ============================================================
+# Dane analityczne / rynkowe (nie wersjonujemy)
+# ============================================================
+analysis/data/
+
+# ============================================================
+# ML models – artifacts
+#   - test/ i prd/ NIE wersjonujemy
+#   - prezentation/ wersjonujemy (wybrane modele do prezentacji)
+# ============================================================
+app/ml/models/test/
+app/ml/models/prd/
+
+# Jeśli kiedykolwiek pojawi się reguła ignorująca całe app/ml/models/,
+# to te wyjątki gwarantują, że prezentation będzie śledzone w GIT:
+!app/ml/models/prezentation/
+!app/ml/models/prezentation/**
+
+# Demo data included in public repo
+!analysis/data/
+!analysis/data/wse/
+!analysis/data/wse/*.csv

@@ -1,0 +1,32 @@
+# --- Streamlit core ---
+streamlit==1.52.2
+
+# --- Streamlit components ---
+streamlit-aggrid==0.3.4.post3
+
+# --- Data handling ---
+numpy
+pandas
+pyarrow==22.0.0
+
+# --- ML / analytics ---
+scikit-learn==1.7.1
+joblib
+
+# --- Visualization ---
+matplotlib
+seaborn
+plotly
+altair==6.0.0
+pydeck==0.9.1
+pillow
+
+# --- App runtime / utils ---
+python-dotenv
+pyyaml
+requests
+watchdog==6.0.0
+
+# --- Optional app dependencies kept for compatibility ---
+sqlalchemy
+pyodbc
