@@ -20,6 +20,14 @@ Celem projektu jest:
 
 Projekt koncentruje się na **rozumieniu rynku**, a nie na bezpośrednim przewidywaniu cen.
 
+
+---
+
+## Demo aplikacji
+
+[**Otwórz aplikację Analiza Giełdowa**](https://gpw-analytics-ml-tz.streamlit.app/)
+
+
 ---
 
 ## Instrukcja aplikacji:
@@ -108,18 +116,6 @@ Plik `.env` służy wyłącznie do:
 
 Plik `.env` nie jest wersjonowany i nie trafia do repozytorium.
 
-AnGG/
-├── app.py                  # entry point aplikacji Streamlit
-├── app/                    # warstwa UI (Streamlit)
-│   └── ui/
-├── core/                   # konfiguracja, DB, infrastruktura
-├── etl/                    # import i przetwarzanie danych
-├── analysis/               # analiza danych, wskaźniki, ML
-├── automation/             # przyszłe joby / schedulery
-├── config/                 # konfiguracja aplikacji i ETL
-├── documentation/          # dokumentacja (ADR, backlog, brief)
-├── environment.yml         # definicja środowiska Conda
-└── README.md
 
 
 ### Uruchomienie aplikacji (DEV)
