@@ -104,11 +104,11 @@ st.markdown(
        ========================================================= */
     html, body {
         font-size: 13px;                 /* (A) Mniejsza baza całej aplikacji
-        background-color: #12161d;
+        background-color: #445066;
     }
     div[data-testid="stAppViewContainer"],
     section.main > div {
-        background-color: #12161d;       /* (B) Tło głównej powierzchni */
+        background-color: #445066;       /* (B) Tło głównej powierzchni */
     }
 
     /* =========================================================
